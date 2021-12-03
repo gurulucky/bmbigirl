@@ -1,3 +1,4 @@
+mongodb+srv://gurulucky:<password>@cluster0.xe6yw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
