@@ -1,28 +1,8 @@
 const express = require('express');
 const path = require('path');
-
 const app = express();
 const controller = require('./backend/logic');
 
-const mongoose = require('mongoose');
-const connectDB = async () => {
-	try {
-		await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/igirl', {
-			useNewUrlParser: true,
-			useCreateIndex: true,
-			useFindAndModify: false,
-			useUnifiedTopology: true
-		});
-
-		console.log('MongoDB Connected.');
-	} catch (err) {
-		console.error(err.message);
-		// Exit process with failure
-		process.exit(1);
-	}
-};
-
-connectDB();
 
 app.use(express.json());
 
@@ -34,7 +14,6 @@ app.use(function(req, res, next) {
 });
 // Define Routes
 // app.use('/api/users', require('./routes/api/users'));
-app.post('/api/buy', controller.buy);
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
