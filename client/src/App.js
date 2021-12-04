@@ -95,10 +95,10 @@ function App() {
     let res;
     let igirlNFT = new window.web3.eth.Contract(nft_abi, NFT_ADDRESS);
     let igirlToken = new window.web3.eth.Contract(token_abi, TOKEN_ADDRESS);
-    const seller = await igirlNFT.methods.owner().call();
-    let allowance = await igirlToken.methods.allowance(account, seller).call();
+    // const seller = await igirlNFT.methods.owner().call();
+    let allowance = await igirlToken.methods.allowance(account, NFT_ADDRESS).call();
     if(isBigger(String(allowance), PRICE) == -1){
-      res = await igirlToken.methods.approve(seller, window.web3.toBigNumber(PRICE)).send({from:account});
+      res = await igirlToken.methods.approve(NFT_ADDRESS, window.web3.toBigNumber(PRICE)).send({from:account});
       console.log(res);
     }
     res = await igirlNFT.methods.mint(uri).send({ from: account });
