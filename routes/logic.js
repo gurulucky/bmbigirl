@@ -28,18 +28,22 @@ const buy = async (req, res) => {
         let result = await NFT.find({ minted: true });
         let mintedCount = result.length;
         console.log('Total minted:', mintedCount);
+        if(mintedCount === TOTAL){
+            res.json({uri:null, msg:'All NFTs were sold.'})
+            return;
+        }
         let rule = RULE.find(item => item[0] > mintedCount);
         if (rule) {
             result = await NFT.find({ minted: false, rarity: { $in: rule[1] } });
             // console.log(result);
             let id = Math.floor(Math.random() * result.length);
-            res.json({id:result[id].tokenId, uri:result[id].tokenUri, rarity:result[id].rarity});
+            res.json({id:result[id].tokenId, uri:result[id].tokenUri, rarity:result[id].rarity, msg:''});
         } else {
-            res.json({ uri: null })
+            res.json({ uri: null, msg: 'Buying mystery-box failed.' })
         }
     } catch (err) {
         console.error(err.message);
-        res.json({uri: null})
+        res.json({uri: null, msg: 'Buying mystery-box failed.' })
     }
 }
 

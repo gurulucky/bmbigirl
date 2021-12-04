@@ -9,7 +9,7 @@ import axios from 'axios';
 import { token_abi, nft_abi } from './abi';
 
 const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b";
-const NFT_ADDRESS = "0x948C0E35295831A7B28C8Bf5A4e99fBA8D186De7";
+const NFT_ADDRESS = "0x13Cd33C72188C76074E307Bae4717D0be0A63524";
 const PRICE = "150000000000000";
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [rarity, setRarity] = useState("");
+  const [tokenId, setTokenId] = useState(0);
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -65,28 +66,31 @@ function App() {
       let uri = res.data.uri;
       let id = res.data.id;
       let rarity = res.data.rarity;
+      let msg = res.data.msg;
       console.log(res.data);
       if (uri) {
         res = await mint(id, uri);
         if (res.status) {
           const tokenUri = await getTokenUri(id);
           let response = await axios.get(tokenUri);
-          // console.log(response);
+          // let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${uri}`);
+          console.log(response);
           setName(response.data.name);
           setDescription(response.data.description);
           setImageUrl(response.data.image);
-          
+
           setRarity(rarity);
+          setTokenId(id);
 
           res = await api.post('/mint', { tokenUri: uri });
           if (res.data.minted) {
-            NotificationManager.success(`You minted NFT successfully! Your NFT's id is .`);
+            NotificationManager.success(`You minted IGIRL NFT successfully!. TokenId is ${id}.`);
           }
-        }else{
-          NotificationManager.error('Minted failed.');
+        } else {
+          NotificationManager.error('Minting failed.');
         }
       } else {
-        NotificationManager.error("You can't buy mysterybox.");
+        NotificationManager.error(msg);
       }
     } catch (err) {
       console.log(err.message);
@@ -163,6 +167,9 @@ function App() {
               <Typography variant='h5' color='blue'>{`Name: ${name}`}</Typography>
               <Typography variant='h5' color='blue'>{`Description: ${description}`}</Typography>
               <Typography variant='h5' color='blue'>{`Rarity: ${rarity}`}</Typography>
+              <a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${tokenId}`} target="_blank">
+                <Typography variant='h6' color='blue'>click here to check.</Typography>
+              </a>
             </>
           }
         </Container>
@@ -171,22 +178,22 @@ function App() {
           <Typography variant='h5' color="red">Price: 150,000 IGIRL</Typography>
 
           <Typography variant='h6'>
-            1. Basic — 79.99% (7,999 pieces)
+            1. Basic — 28.57% (6 pieces)
           </Typography>
           <Typography variant='h6'>
-            2. Rare — 11% (1,100 pieces)
+            2. Rare — 23.81% (5 pieces)
           </Typography>
           <Typography variant='h6'>
-            3. Epic — 5% (500 pieces)
+            3. Epic — 19.05% (4 pieces)
           </Typography>
           <Typography variant='h6'>
-            4. Legndry —3% (300 pieces)
+            4. Legndry —14.29% (3 pieces)
           </Typography>
           <Typography variant='h6'>
-            5. Mythical — 1% (100 pices)
+            5. Mythical — 9.52% (2 pices)
           </Typography>
           <Typography variant='h6'>
-            6. God - 0.01% (1 piece)
+            6. God - 4.76% (1 piece)
           </Typography>
 
           <Button variant="contained" color="warning" onClick={buy}>Buy</Button>
