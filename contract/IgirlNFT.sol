@@ -83,14 +83,14 @@ contract IgirlNFT is ERC721, Ownable {
         priceIgirl = _price;
     }
 
-    function mint(string memory tokenUri) public returns (uint256) {
+    function mint(uint256 tokenId, string memory tokenUri) public returns (uint256) {
         require(token.balanceOf(msg.sender) >= priceIgirl, "IGIRL isn't enough");
         
         require(priceIgirl<=token.allowance(msg.sender, address(this)), "allowance isn't enough");
         token.transferFrom(msg.sender, owner(), priceIgirl);
         
-        _safeMint(msg.sender, tokenCounter.add(1));
-        _setTokenURI(tokenCounter.add(1), tokenUri);
+        _safeMint(msg.sender, tokenId);
+        _setTokenURI(tokenId, tokenUri);
         tokenCounter = tokenCounter.add(1);
         
         return tokenCounter;
