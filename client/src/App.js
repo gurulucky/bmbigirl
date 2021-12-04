@@ -9,7 +9,7 @@ import axios from 'axios';
 import { token_abi, nft_abi } from './abi';
 
 const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b";
-const NFT_ADDRESS = "0x21408b8108a721fB417F293c36025CF50a8Db0A0";
+const NFT_ADDRESS = "0x948C0E35295831A7B28C8Bf5A4e99fBA8D186De7";
 const PRICE = "150000000000000";
 
 function App() {
@@ -63,25 +63,27 @@ function App() {
       }
       let res = await api.post('/buy');
       let uri = res.data.uri;
+      let id = res.data.id;
       let rarity = res.data.rarity;
+      console.log(res.data);
       if (uri) {
-        res = await mint(uri);
-        console.log('mint', res);
-        let tokenId = res;
-        const tokenUri = await getTokenUri(tokenId);
+        res = await mint(id, uri);
+        if (res.status) {
+          const tokenUri = await getTokenUri(id);
+          let response = await axios.get(tokenUri);
+          // console.log(response);
+          setName(response.data.name);
+          setDescription(response.data.description);
+          setImageUrl(response.data.image);
+          
+          setRarity(rarity);
 
-        console.log(uri);
-        let response = await axios.get(tokenUri);
-        // console.log(response);
-        setName(response.data.name);
-        setDescription(response.data.description);
-        setImageUrl(response.data.image);
-
-        setRarity(rarity);
-
-        res = await api.post('/mint', {tokenUri:uri});
-        if(res.data.minted){
-          NotificationManager.success(`You minted NFT successfully! Your NFT's id is .`);
+          res = await api.post('/mint', { tokenUri: uri });
+          if (res.data.minted) {
+            NotificationManager.success(`You minted NFT successfully! Your NFT's id is .`);
+          }
+        }else{
+          NotificationManager.error('Minted failed.');
         }
       } else {
         NotificationManager.error("You can't buy mysterybox.");
@@ -97,19 +99,19 @@ function App() {
     let igirlToken = new window.web3.eth.Contract(token_abi, TOKEN_ADDRESS);
     // const seller = await igirlNFT.methods.owner().call();
     let allowance = await igirlToken.methods.allowance(account, NFT_ADDRESS).call();
-    if(isBigger(String(allowance), PRICE) == -1){
-      res = await igirlToken.methods.approve(NFT_ADDRESS, PRICE).send({from:account});
-      console.log(res);
+    if (isBigger(String(allowance), PRICE) == -1) {
+      res = await igirlToken.methods.approve(NFT_ADDRESS, PRICE).send({ from: account });
+      console.log("approve", res.status);
     }
     res = await igirlNFT.methods.mint(uri).send({ from: account });
-    console.log(res);
+    cosole.log("mint", res.status);
     return res;
   }
 
   const getTokenUri = async (tokenId) => {
     let igirlNFT = new window.web3.eth.Contract(nft_abi, NFT_ADDRESS);
     const res = await igirlNFT.methods.tokenUri(tokenId).call();
-    console.log(res);
+    console.log(`${tokenId} : ${res}`);
     return res;
   }
 

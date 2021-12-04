@@ -73,6 +73,11 @@ export const nft_abi = [
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
                 "internalType": "string",
                 "name": "tokenUri",
                 "type": "string"

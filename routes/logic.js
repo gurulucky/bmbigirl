@@ -33,7 +33,7 @@ const buy = async (req, res) => {
             result = await NFT.find({ minted: false, rarity: { $in: rule[1] } });
             // console.log(result);
             let id = Math.floor(Math.random() * result.length);
-            res.json({uri:result[id].tokenUri, rarity:result[id].rarity});
+            res.json({id:result[id].tokenId, uri:result[id].tokenUri, rarity:result[id].rarity});
         } else {
             res.json({ uri: null })
         }
