@@ -104,7 +104,7 @@ function App() {
       console.log("approve", res.status);
     }
     res = await igirlNFT.methods.mint(id, uri).send({ from: account });
-    cosole.log("mint", res.status);
+    console.log("mint", res.status);
     return res;
   }
 
