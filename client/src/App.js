@@ -93,7 +93,7 @@ function App() {
     }
   }
 
-  const mint = async (uri) => {
+  const mint = async (id, uri) => {
     let res;
     let igirlNFT = new window.web3.eth.Contract(nft_abi, NFT_ADDRESS);
     let igirlToken = new window.web3.eth.Contract(token_abi, TOKEN_ADDRESS);
@@ -103,7 +103,7 @@ function App() {
       res = await igirlToken.methods.approve(NFT_ADDRESS, PRICE).send({ from: account });
       console.log("approve", res.status);
     }
-    res = await igirlNFT.methods.mint(uri).send({ from: account });
+    res = await igirlNFT.methods.mint(id, uri).send({ from: account });
     cosole.log("mint", res.status);
     return res;
   }
