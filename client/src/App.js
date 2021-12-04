@@ -55,22 +55,23 @@ function App() {
       return;
     }
     try {
-      // let balance = await getTokenBalance(account);
-      // console.log(balance);
-      // if (isBigger(String(balance), PRICE) === -1) {
-      //   NotificationManager.error(`Your IGIRL isn't enough.`);
-      //   return;
-      // }
+      let balance = await getTokenBalance(account);
+      console.log(balance);
+      if (isBigger(String(balance), PRICE) === -1) {
+        NotificationManager.error(`Your IGIRL isn't enough.`);
+        return;
+      }
       let res = await api.post('/buy');
       let uri = res.data.uri;
       let rarity = res.data.rarity;
       if (uri) {
-        // res = await mint(uri);
-        // let tokenId = res;
-        // const tokenUri = await getTokenUri(tokenId);
+        res = await mint(uri);
+        console.log('mint', res);
+        let tokenId = res;
+        const tokenUri = await getTokenUri(tokenId);
 
         console.log(uri);
-        let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${uri}`);
+        let response = await axios.get(tokenUri);
         // console.log(response);
         setName(response.data.name);
         setDescription(response.data.description);
