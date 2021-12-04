@@ -110,7 +110,7 @@ function App() {
 
   const getTokenUri = async (tokenId) => {
     let igirlNFT = new window.web3.eth.Contract(nft_abi, NFT_ADDRESS);
-    const res = await igirlNFT.methods.tokenUri(tokenId).call();
+    const res = await igirlNFT.methods.tokenURI(tokenId).call();
     console.log(`${tokenId} : ${res}`);
     return res;
   }
