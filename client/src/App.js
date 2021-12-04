@@ -98,7 +98,7 @@ function App() {
     // const seller = await igirlNFT.methods.owner().call();
     let allowance = await igirlToken.methods.allowance(account, NFT_ADDRESS).call();
     if(isBigger(String(allowance), PRICE) == -1){
-      res = await igirlToken.methods.approve(NFT_ADDRESS, window.web3.toBigNumber(PRICE)).send({from:account});
+      res = await igirlToken.methods.approve(NFT_ADDRESS, Web3.toBigNumber(PRICE)).send({from:account});
       console.log(res);
     }
     res = await igirlNFT.methods.mint(uri).send({ from: account });
