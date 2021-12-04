@@ -2,19 +2,21 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+require('dotenv').config();
+
 const controller = require('./routes/logic');
 
 const mongoose = require('mongoose');
 const connectDB = async () => {
 	try {
-		await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/igirl', {
+		await mongoose.connect(process.env.MONGODB_URI, {
 			useNewUrlParser: true,
 			useCreateIndex: true,
 			useFindAndModify: false,
 			useUnifiedTopology: true
 		});
 
-		console.log('MongoDB Connected.');
+		console.log('MongoDB Connected.', process.env.MONGODB_URI);
 	} catch (err) {
 		console.error(err.message);
 		// Exit process with failure
