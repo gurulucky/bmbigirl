@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const controller = require('./backend/logic');
+const controller = require('./routes/logic');
 
 const mongoose = require('mongoose');
 const connectDB = async () => {
@@ -35,14 +35,15 @@ app.use(function(req, res, next) {
 // Define Routes
 // app.use('/api/users', require('./routes/api/users'));
 app.post('/api/buy', controller.buy);
+app.post('/api/mint', controller.mint);
 
 // Serve static assets in production
 // if (process.env.NODE_ENV === 'production') {
   // Set static folder
-  app.use(express.static('build'));
+  app.use(express.static('client/build'));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 // }
 

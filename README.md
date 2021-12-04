@@ -1,3 +1,4 @@
+# mongo db uri
 mongodb+srv://gurulucky:<password>@cluster0.xe6yw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 # Getting Started with Create React App
 
