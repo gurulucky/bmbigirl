@@ -17,12 +17,6 @@ const NftSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
-    },
-    account:{
-        type:String
-    },
-    mintDate:{
-        type:Date
     }
 });
 

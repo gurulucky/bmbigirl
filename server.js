@@ -38,6 +38,7 @@ app.use(function(req, res, next) {
 // app.use('/api/users', require('./routes/api/users'));
 app.post('/api/buy', controller.buy);
 app.post('/api/mint', controller.mint);
+app.post('/api/nfts', controller.getNFTs);
 
 // Serve static assets in production
 // if (process.env.NODE_ENV === 'production') {

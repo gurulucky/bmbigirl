@@ -1,7 +1,7 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
-import { Container, Stack, Button, Typography, Box } from '@mui/material';
+import { Container, Stack, Button, Typography, Box, TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@mui/material';
 import 'react-notifications/lib/notifications.css';
 import Web3 from 'web3';
 import api from './api';
@@ -10,7 +10,7 @@ import { token_abi, nft_abi } from './abi';
 
 const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b";
 const NFT_ADDRESS = "0x13Cd33C72188C76074E307Bae4717D0be0A63524";
-const PRICE = "150000000000000";
+const PRICE = "100000000000000";
 
 function App() {
   const [account, setAccount] = useState("");
@@ -19,6 +19,13 @@ function App() {
   const [description, setDescription] = useState("");
   const [rarity, setRarity] = useState("");
   const [tokenId, setTokenId] = useState(0);
+  const [myNFTs, setMyNFTs] = useState([]);
+
+  useEffect(() => {
+    if (account) {
+      getNFTs(account);
+    }
+  }, [account]);
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -48,6 +55,25 @@ function App() {
       return "0x" + lowCase.charAt(2).toUpperCase() + lowCase.substr(3, 3) + "..." + lowCase.substr(-4);
     }
     return address;
+  }
+
+  const getNFTs = async () => {
+    try {
+      console.log('getNFTs');
+      let res = await api.post('/nfts', { account });
+      let nfts = res.data.nfts;
+      let newNfts = [];
+      for (let i = 0; i < nfts.length; i++) {
+        let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${nfts[i].tokenUri}`);
+        let date = new Date(nfts[i].mintDate);
+
+        newNfts.push({ id: nfts[i].tokenId, image: response.data.image, name: response.data.name, description: response.data.description, rarity: nfts[i].rarity, date: date.toLocaleDateString() + ' ' + date.toLocaleTimeString() });
+      }
+      console.log(newNfts);
+      setMyNFTs(newNfts);
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   const buy = async () => {
@@ -81,11 +107,12 @@ function App() {
 
           setRarity(rarity);
           setTokenId(id);
-
-          res = await api.post('/mint', { tokenUri: uri });
+          let mintDate = new Date();
+          res = await api.post('/mint', { tokenUri: uri, account, mintDate });
           if (res.data.minted) {
             NotificationManager.success(`You minted IGIRL NFT successfully!. TokenId is ${id}.`);
           }
+          setMyNFTs([{ id, image: response.data.image, name: response.data.name, description: response.data.description, rarity, date: mintDate.toLocaleDateString() + ' ' + mintDate.toLocaleTimeString() }, ...myNFTs]);
         } else {
           NotificationManager.error('Minting failed.');
         }
@@ -148,7 +175,7 @@ function App() {
   }
 
   return (
-    <Container sx={{ p: "20px" }}>
+    <Container sx={{ p: "20px" }} >
       <Stack direction='row' justifyContent='flex-end'>
         <Button variant='contained' color='primary' onClick={connectWallet}>{account ? shortAddress(account) : `Connect`}</Button>
       </Stack>
@@ -164,18 +191,15 @@ function App() {
             }} />
           {
             imageUrl && <>
-              <Typography variant='h5' color='blue'>{`Name: ${name}`}</Typography>
+              <Typography variant='h5' color='blue'>Name:<a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${tokenId}`} target="_blank">{name}</a></Typography>
               <Typography variant='h5' color='blue'>{`Description: ${description}`}</Typography>
               <Typography variant='h5' color='blue'>{`Rarity: ${rarity}`}</Typography>
-              <a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${tokenId}`} target="_blank">
-                <Typography variant='h6' color='blue'>click here to check.</Typography>
-              </a>
             </>
           }
         </Container>
         <Stack direction='column' sx={{ width: "50%" }} spacing={1}>
           <Typography variant="h4" color="blue">Binance mystery box - Island Girl</Typography>
-          <Typography variant='h5' color="red">Price: 150,000 IGIRL</Typography>
+          <Typography variant='h5' color="red">{`Price: ${PRICE.slice(0, -9)} IGIRL`}</Typography>
 
           <Typography variant='h6'>
             1. Basic — 28.57% (6 pieces)
@@ -199,7 +223,37 @@ function App() {
           <Button variant="contained" color="warning" onClick={buy}>Buy</Button>
         </Stack>
       </Stack>
-
+      <TableContainer component={Paper} sx={{ mt: "20px" }}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">No</TableCell>
+              <TableCell align="left">Thumbnail</TableCell>
+              <TableCell align="left">Name</TableCell>
+              <TableCell align="left">Description</TableCell>
+              <TableCell align="left">Rarity</TableCell>
+              <TableCell align="left">Buy Date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {myNFTs.map((row, index) => (
+              <TableRow
+                key={row.mintDate}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {index + 1}
+                </TableCell>
+                <TableCell align="left"><img src={row.image} width="50px" height="50px" /> </TableCell>
+                <TableCell align="left"><a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${row.id}`} target="_blank">{row.name}</a></TableCell>
+                <TableCell align="left">{row.description}</TableCell>
+                <TableCell align="left">{row.rarity}</TableCell>
+                <TableCell align="left">{row.date}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <NotificationContainer />
     </Container>
   );
