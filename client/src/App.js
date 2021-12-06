@@ -9,7 +9,7 @@ import axios from 'axios';
 import { token_abi, nft_abi } from './abi';
 
 const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b";
-const NFT_ADDRESS = "0x13Cd33C72188C76074E307Bae4717D0be0A63524";
+const NFT_ADDRESS = "0x3625a46A91286BCCBd66Be1bfA9e0eC5b14134c3";
 const PRICE = "100000000000000";
 
 function App() {
