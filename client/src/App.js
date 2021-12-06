@@ -191,9 +191,9 @@ function App() {
             }} />
           {
             imageUrl && <>
-              <Typography variant='h5' color='blue'>Name:<a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${tokenId}`} target="_blank">{name}</a></Typography>
-              <Typography variant='h5' color='blue'>{`Description: ${description}`}</Typography>
-              <Typography variant='h5' color='blue'>{`Rarity: ${rarity}`}</Typography>
+              <Typography variant='h6' color='blue'>Name:<a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${tokenId}`} target="_blank">{`${name} #${tokenId}`}</a></Typography>
+              <Typography variant='h6' color='blue'>{`Description: ${description}`}</Typography>
+              <Typography variant='h6' color='blue'>{`Rarity: ${rarity}`}</Typography>
             </>
           }
         </Container>
@@ -223,6 +223,7 @@ function App() {
           <Button variant="contained" color="warning" onClick={buy}>Buy</Button>
         </Stack>
       </Stack>
+      <Typography variant="h6" color="primary">{`You have ${myNFTs.length} IGIRL NFTs.`}</Typography>
       <TableContainer component={Paper} sx={{ mt: "20px" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -245,7 +246,7 @@ function App() {
                   {index + 1}
                 </TableCell>
                 <TableCell align="left"><img src={row.image} width="50px" height="50px" /> </TableCell>
-                <TableCell align="left"><a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${row.id}`} target="_blank">{row.name}</a></TableCell>
+                <TableCell align="left"><a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${row.id}`} target="_blank">{`${row.name} #${row.id}`}</a></TableCell>
                 <TableCell align="left">{row.description}</TableCell>
                 <TableCell align="left">{row.rarity}</TableCell>
                 <TableCell align="left">{row.date}</TableCell>
