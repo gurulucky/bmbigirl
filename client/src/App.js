@@ -37,7 +37,7 @@ function App() {
     },
     {
       image: '/nfts/3.jpg',
-      desc: 'Legndry - 3% (300 pieces)'
+      desc: 'Legendary - 3% (300 pieces)'
     },
     {
       image: '/nfts/4.jpg',
@@ -51,7 +51,7 @@ function App() {
 
   useEffect(() => {
     // window.web3 = new Web3('https://bsc-dataseed1.ninicoin.io');
-    window.web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545/');
+    // window.web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545/');
 
     if (account) {
       getNFTs(account);
@@ -61,7 +61,7 @@ function App() {
 
   const connectWallet = async () => {
     if (window.ethereum) {
-      // window.web3 = new Web3(window.ethereum);
+      window.web3 = new Web3(window.ethereum);
       try {
         const chainId = await window.ethereum.request({
           method: "eth_chainId"
@@ -224,7 +224,7 @@ function App() {
         <Container sx={{ width: "50%" }}>
           <Box
             component='img'
-            src={imageUrl || '/empty.png'}
+            src={imageUrl || '/box.png'}
             sx={{
               width: "300px",
               height: "300px",
