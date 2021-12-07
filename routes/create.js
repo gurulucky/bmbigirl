@@ -1,0 +1,103 @@
+const mongoose = require('mongoose');
+const NFT = require('../model/Nft');
+
+const DB = 'mongodb+srv://gurulucky:wjsrlgkrdnjs2@cluster0.xe6yw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+// const DB = 'mongodb://localhost:27017/igirl';
+// let RARITY = [
+//     ["Common", 6],
+//     ["Rare", 5],
+//     ["Epic", 4],
+//     ["Legndry", 3],
+//     ["Mythical", 2],
+//     ["God", 1]
+// ];
+/**
+ * Common
+ * Rare
+ * Epic
+ * Legendary
+ * Mythical
+ */
+var NAMES = [
+    'Esmeralda',
+    'Ria',
+    'Manda',
+    'Charlotte',
+    'Lily',
+    'Alice'
+];
+var DESCRIPTIONS = [
+    'Common',
+    'Rare',
+    'Epic',
+    'Legendary',
+    'Mythical',
+    'God'
+];
+var RULE_COUNTS = [6, 5, 4, 3, 2, 1];
+
+var URIS = [
+    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
+    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
+    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
+    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
+    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
+    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx"
+];
+
+var TOTAL = 21;
+var ID = 10000;
+
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(DB, {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useFindAndModify: false,
+            useUnifiedTopology: true
+        });
+
+        console.log('MongoDB Connected.', DB);
+    } catch (err) {
+        console.error(err.message);
+        // Exit process with failure
+        process.exit(1);
+    }
+};
+
+const create = async () => {
+    try {
+        await NFT.remove({});
+        let KIND_COUNT = RULE_COUNTS.length;
+        while (TOTAL) {
+            let index;
+            do {
+                index = Math.floor(Math.random() * KIND_COUNT);
+            } while (RULE_COUNTS[index] == 0);
+            
+            let newNft = new NFT({
+                tokenId: ID,
+                tokenUri: URIS[index],
+                rarity: DESCRIPTIONS[index],
+                minted: false
+            });
+            let res = await newNft.save();
+            console.log(res);
+
+            ID += 1;
+            RULE_COUNTS[index] -= 1;
+            TOTAL -= 1;            
+        }
+        console.log('end creation');
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+const main = async()=>{
+    await connectDB();
+    create();
+}
+
+main();

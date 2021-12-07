@@ -20,16 +20,48 @@ function App() {
   const [rarity, setRarity] = useState("");
   const [tokenId, setTokenId] = useState(0);
   const [myNFTs, setMyNFTs] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const RULES = [
+    {
+      image: '/nfts/0.jpg',
+      desc: 'Common - 79.99% (7,999 pieces)'
+    },
+    {
+      image: '/nfts/1.jpg',
+      desc: 'Rare - 11% (1,100 pieces)'
+    },
+    {
+      image: '/nfts/2.jpg',
+      desc: 'Epic - 5% (500 pieces)'
+    },
+    {
+      image: '/nfts/3.jpg',
+      desc: 'Legndry - 3% (300 pieces)'
+    },
+    {
+      image: '/nfts/4.jpg',
+      desc: 'Mythical - 1% (100 pieces)'
+    },
+    {
+      image: '/nfts/5.jpg',
+      desc: 'God - 0.01% (1 piece)'
+    }
+  ]
 
   useEffect(() => {
+    // window.web3 = new Web3('https://bsc-dataseed1.ninicoin.io');
+    window.web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545/');
+
     if (account) {
       getNFTs(account);
+      getTotalCount();
     }
   }, [account]);
 
   const connectWallet = async () => {
     if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
+      // window.web3 = new Web3(window.ethereum);
       try {
         const chainId = await window.ethereum.request({
           method: "eth_chainId"
@@ -83,7 +115,6 @@ function App() {
     }
     try {
       let balance = await getTokenBalance(account);
-      console.log(balance);
       if (isBigger(String(balance), PRICE) === -1) {
         NotificationManager.error(`Your IGIRL isn't enough.`);
         return;
@@ -97,6 +128,7 @@ function App() {
       if (uri) {
         res = await mint(id, uri);
         if (res.status) {
+          await getTotalCount();
           const tokenUri = await getTokenUri(id);
           let response = await axios.get(tokenUri);
           // let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${uri}`);
@@ -108,7 +140,7 @@ function App() {
           setRarity(rarity);
           setTokenId(id);
           let mintDate = new Date();
-          res = await api.post('/mint', { tokenUri: uri, account, mintDate });
+          res = await api.post('/mint', { id, account, mintDate });
           if (res.data.minted) {
             NotificationManager.success(`You minted IGIRL NFT successfully!. TokenId is ${id}.`);
           }
@@ -146,6 +178,14 @@ function App() {
     return res;
   }
 
+  const getTotalCount = async () => {
+    let igirlNFT = new window.web3.eth.Contract(nft_abi, NFT_ADDRESS);
+    const res = await igirlNFT.methods.totalSupply().call();
+    console.log(`${totalSupply} : ${res}`);
+    setTotal(res);
+    return res;
+  }
+
   const isBigger = (x, y) => {
     x = x || "0";
     y = y || "0";
@@ -167,6 +207,7 @@ function App() {
       let tokenContract = new window.web3.eth.Contract(token_abi, TOKEN_ADDRESS);
       let balance = await tokenContract.methods.balanceOf(account).call();
       // console.log(typeof (balance));
+      console.log('balance', balance);
       return balance;
     } catch (err) {
       console.log(err.message);
@@ -199,28 +240,31 @@ function App() {
         </Container>
         <Stack direction='column' sx={{ width: "50%" }} spacing={1}>
           <Typography variant="h4" color="blue">Binance mystery box - Island Girl</Typography>
-          <Typography variant='h5' color="red">{`Price: ${PRICE.slice(0, -9)} IGIRL`}</Typography>
+          <Stack direction='row' justifyContent='space-between'>
+            <Typography variant='h5' color="red">{`Price: ${PRICE.slice(0, -9)} IGIRL`}</Typography>
+            <Typography variant='h5' color='black'>{account && `Left: ${10000 - total}`}</Typography>
+            <Typography variant='h5' color='black'>{`Total supply: 10000`}</Typography>
+          </Stack>
 
-          <Typography variant='h6'>
-            1. Basic — 28.57% (6 pieces)
-          </Typography>
-          <Typography variant='h6'>
-            2. Rare — 23.81% (5 pieces)
-          </Typography>
-          <Typography variant='h6'>
-            3. Epic — 19.05% (4 pieces)
-          </Typography>
-          <Typography variant='h6'>
-            4. Legndry —14.29% (3 pieces)
-          </Typography>
-          <Typography variant='h6'>
-            5. Mythical — 9.52% (2 pices)
-          </Typography>
-          <Typography variant='h6'>
-            6. God - 4.76% (1 piece)
-          </Typography>
-
-          <Button variant="contained" color="warning" onClick={buy}>Buy</Button>
+          <Table aria-label="simple table">
+            <TableBody>
+              {RULES.map((row, index) => (
+                <TableRow
+                  key={row.image}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell align="left"><img src={row.image} width="50px" height="50px" /> </TableCell>
+                  <TableCell align="left">{row.desc}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          {
+            total < 10000 ?
+              <Button variant="contained" color="warning" onClick={buy} disabled={!account}>Buy</Button>
+              :
+              <Typography variant='h5' color="black" textAlign='center'>Sold out</Typography>
+          }
         </Stack>
       </Stack>
       <Typography variant="h6" color="primary">{`You have ${myNFTs.length} IGIRL NFTs.`}</Typography>

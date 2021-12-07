@@ -1,7 +1,7 @@
 const NFT = require('../model/Nft');
 
 const RARITY = [
-    ["Basic", 6],
+    ["Common", 6],
     ["Rare", 5],
     ["Epic", 4],
     ["Legndry", 3],
@@ -12,16 +12,16 @@ const RARITY = [
 const TOTAL = 21;
 
 const RULE = [
-    [2, ["Basic", "Rare", "Epic"]],
-    [6, ["Basic", "Rare", "Epic", "Legndry", "Mythical"]],
-    [21, ["Basic", "Rare", "Epic", "Legndry", "Mythical", "God"]]
+    // [2, ["Common", "Rare", "Epic"]],
+    [6, ["Common", "Rare", "Epic", "Legendary", "Mythical"]],
+    [21, ["Common", "Rare", "Epic", "Legendary", "Mythical", "God"]]
 ];
 
 const buy = async (req, res) => {
     try {
         // const newNft = new NFT({
         //     tokenUri:"https://gateway.pinata.cloud/ipfs/QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
-        //     rarity:"Basic"
+        //     rarity:"Common"
         // });
         // const nft = await newNft.save();
         // res.json({ nft });
@@ -48,12 +48,12 @@ const buy = async (req, res) => {
 }
 
 const mint = async (req, res) => {
-    let tokenUri = req.body.tokenUri;
+    let tokenId = req.body.id;
     let account = req.body.account;
     let mintDate = req.body.mintDate;
     try {
-        await NFT.updateOne({ tokenUri }, { $set: { minted: true, account, mintDate } });
-        console.log(`minted: ${tokenUri}`);
+        await NFT.updateOne({ tokenId }, { $set: { minted: true, account, mintDate } });
+        console.log(`minted: ${tokenId}`);
         res.json({ minted: true });
     } catch (err) {
         console.log(err.message);
