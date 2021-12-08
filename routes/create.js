@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const NFT = require('../model/Nft');
 
-// const DB = 'mongodb+srv://gurulucky:wjsrlgkrdnjs2@cluster0.xe6yw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-const DB = 'mongodb://localhost:27017/igirl';
+const DB = 'mongodb+srv://gurulucky:wjsrlgkrdnjs2@cluster0.xe6yw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+// const DB = 'mongodb://localhost:27017/igirl';
 // let RARITY = [
 //     ["Common", 6],
 //     ["Rare", 5],
@@ -36,13 +36,14 @@ var DESCRIPTIONS = [
 ];
 var RULE_COUNTS = [6, 5, 4, 3, 2, 1];
 
+
 var URIS = [
-    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
-    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
-    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
-    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
-    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx",
-    "QmYEzKHwRHeqyinwxYoraY45KP2cBftpFaDySH1NHwsHwx"
+    "QmapYGfy46ZGERSVrczMbjZwa3T1w23B9ZiWmXY6PiVW38",
+    "QmbUFVZgbwjgn32S4bKFNv73ftzu8zoWjuWjvVzdaMBzzM",
+    "QmXnEghy69cQxUmMc5MXLbbqJY2ry1zSqe4hdbDvuHJLAG",
+    "QmT1TeyF3LFgwQeN54YxvtAhbbE513DFhXn1K9WMHniFYN",
+    "Qma698LwJL7Hw4D5SH5pREUgvUEmT5JS8vaBiKPdDNZ7CU",
+    "QmXhDzt1QgujQDxhEgtXKKdtr1nqWE9FNCKmHf5SGzb9RX"
 ];
 
 var TOTAL = 21;
