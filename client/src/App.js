@@ -8,20 +8,15 @@ import api from './api';
 import axios from 'axios';
 import { token_abi, nft_abi } from './abi';
 
-const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b"; 
+const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b";
 // const TOKEN_ADDRESS = "0x85469cb22c5e8a063106c987c36c7587810e4bf1"; //main
-const NFT_ADDRESS = "0x3625a46A91286BCCBd66Be1bfA9e0eC5b14134c3";
+const NFT_ADDRESS = "0xBC7fdd211FA0AD02AC8e498E6699Ee1E18827976";
 // const NFT_ADDRESS = "0x4d67E5fECF02b6eb5f790dD3258E85A02d4719ce"; //main
 const PRICE = "100000000000000";
 const TOTAL = 10000;
 
 function App() {
   const [account, setAccount] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [rarity, setRarity] = useState("");
-  const [tokenId, setTokenId] = useState(0);
   const [selIndex, setSelIndex] = useState(-1);
   const [myNFTs, setMyNFTs] = useState([]);
   const [mintedCount, setMintedCount] = useState(0);
@@ -74,12 +69,12 @@ function App() {
 
   useEffect(() => {
     // window.web3 = new Web3('https://bsc-dataseed1.ninicoin.io'); // main
-    // window.web3 = new Web3('https://data-seed-prebsc-1-s3.binance.org:8545/');
+    window.web3 = new Web3('https://data-seed-prebsc-1-s3.binance.org:8545/');
 
     if (account) {
       getNFTs(account);
     }
-    // getTotalCount();
+    getTotalCount();
   }, [account]);
 
   const connectWallet = async () => {
@@ -137,11 +132,11 @@ function App() {
       return;
     }
     try {
-      // let balance = await getTokenBalance(account);
-      // if (isBigger(String(balance), PRICE) === -1) {
-      //   NotificationManager.error(`Your IGIRL isn't enough.`);
-      //   return;
-      // }
+      let balance = await getTokenBalance(account);
+      if (isBigger(String(balance), PRICE) === -1) {
+        NotificationManager.error(`Your IGIRL isn't enough.`);
+        return;
+      }
       let res = await api.post('/buy');
       let uri = res.data.uri;
       let id = res.data.id;
@@ -149,34 +144,28 @@ function App() {
       let msg = res.data.msg;
       console.log(res.data);
       if (uri) {
-        // res = await mint(id, uri);
-        // if (res.status) {
-        //   await getTotalCount();
-        //   const tokenUri = await getTokenUri(id);
-        //   let response = await axios.get(tokenUri);
-        playVideo(rarity);
+        res = await mint(id, uri);
+        if (res.status) {
+          playVideo(rarity);
+          await getTotalCount();
+          const tokenUri = await getTokenUri(id);
+          let response = await axios.get(tokenUri);
 
-        let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${uri}`);
-        console.log(response);
-        // setName(response.data.name);
-        // setDescription(response.data.description);
-        // setImageUrl(response.data.image);
-
-        // setRarity(rarity);
-        // setTokenId(id);
-        let mintDate = new Date();
-        res = await api.post('/mint', { id, account, mintDate });
-        if (res.data.minted) {
-          NotificationManager.success(`You minted IGIRL NFT successfully!. TokenId is ${id}.`);
+          // let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${uri}`);
+          console.log(response);
+          let mintDate = new Date();
+          res = await api.post('/mint', { id, account, mintDate });
+          if (res.data.minted) {
+            NotificationManager.success(`You minted IGIRL NFT successfully!. TokenId is ${id}.`);
+          }
+          setMyNFTs([{ id, image: response.data.image, name: response.data.name, description: response.data.description, rarity, date: mintDate.toLocaleDateString() + ' ' + mintDate.toLocaleTimeString() }, ...myNFTs]);
+          setSelIndex(0);
+        } else {
+          NotificationManager.error('Minting failed.');
         }
-        setMyNFTs([{ id, image: response.data.image, name: response.data.name, description: response.data.description, rarity, date: mintDate.toLocaleDateString() + ' ' + mintDate.toLocaleTimeString() }, ...myNFTs]);
-        setSelIndex(0);
       } else {
-        NotificationManager.error('Minting failed.');
+        NotificationManager.error(msg);
       }
-      // } else {
-      //   NotificationManager.error(msg);
-      // }
     } catch (err) {
       console.log(err.message);
     }
@@ -337,7 +326,7 @@ function App() {
               <TableRow
                 key={row.mintDate}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                onClick={()=>setSelIndex(index)}
+                onClick={() => setSelIndex(index)}
               >
                 <TableCell component="th" scope="row">
                   {index + 1}
