@@ -8,12 +8,9 @@ import api from './api';
 import axios from 'axios';
 import { token_abi, nft_abi } from './abi';
 
-const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b"; 
-// const TOKEN_ADDRESS = "0x85469cb22c5e8a063106c987c36c7587810e4bf1"; //main
+const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b";
 const NFT_ADDRESS = "0x3625a46A91286BCCBd66Be1bfA9e0eC5b14134c3";
-// const NFT_ADDRESS = "0x4d67E5fECF02b6eb5f790dD3258E85A02d4719ce"; //main
 const PRICE = "100000000000000";
-const TOTAL = 10000;
 
 function App() {
   const [account, setAccount] = useState("");
@@ -22,9 +19,8 @@ function App() {
   const [description, setDescription] = useState("");
   const [rarity, setRarity] = useState("");
   const [tokenId, setTokenId] = useState(0);
-  const [selIndex, setSelIndex] = useState(-1);
   const [myNFTs, setMyNFTs] = useState([]);
-  const [mintedCount, setMintedCount] = useState(0);
+  const [total, setTotal] = useState(0);
   const [playing, setPlaying] = useState(false);
 
   const RARITIES = [
@@ -73,13 +69,13 @@ function App() {
   ]
 
   useEffect(() => {
-    // window.web3 = new Web3('https://bsc-dataseed1.ninicoin.io'); // main
-    // window.web3 = new Web3('https://data-seed-prebsc-1-s3.binance.org:8545/');
+    // window.web3 = new Web3('https://bsc-dataseed1.ninicoin.io');
+    // window.web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545/');
 
     if (account) {
       getNFTs(account);
+      getTotalCount();
     }
-    // getTotalCount();
   }, [account]);
 
   const connectWallet = async () => {
@@ -158,19 +154,19 @@ function App() {
 
         let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${uri}`);
         console.log(response);
-        // setName(response.data.name);
-        // setDescription(response.data.description);
-        // setImageUrl(response.data.image);
+        setName(response.data.name);
+        setDescription(response.data.description);
+        setImageUrl(response.data.image);
 
-        // setRarity(rarity);
-        // setTokenId(id);
+        setRarity(rarity);
+        setTokenId(id);
         let mintDate = new Date();
         res = await api.post('/mint', { id, account, mintDate });
         if (res.data.minted) {
           NotificationManager.success(`You minted IGIRL NFT successfully!. TokenId is ${id}.`);
         }
+
         setMyNFTs([{ id, image: response.data.image, name: response.data.name, description: response.data.description, rarity, date: mintDate.toLocaleDateString() + ' ' + mintDate.toLocaleTimeString() }, ...myNFTs]);
-        setSelIndex(0);
       } else {
         NotificationManager.error('Minting failed.');
       }
@@ -207,8 +203,8 @@ function App() {
   const getTotalCount = async () => {
     let igirlNFT = new window.web3.eth.Contract(nft_abi, NFT_ADDRESS);
     const res = await igirlNFT.methods.totalSupply().call();
-    console.log(`${mintedCount} : ${res}`);
-    setMintedCount(Number(res));
+    console.log(`${totalSupply} : ${res}`);
+    setTotal(Number(res));
     return res;
   }
 
@@ -269,17 +265,17 @@ function App() {
             <>
               <Box
                 component='img'
-                src={myNFTs[selIndex]?.image || '/box.png'}
+                src={imageUrl || '/box.png'}
                 sx={{
                   width: "400px",
                   height: "auto",
                   border: "2px solid brown"
                 }} />
               {
-                myNFTs[selIndex] && <>
-                  <Typography variant='h6' color='blue'>Name:<a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${myNFTs[selIndex].id}`} target="_blank">{`${myNFTs[selIndex].name} #${myNFTs[selIndex].id}`}</a></Typography>
-                  <Typography variant='h6' color='blue'>{`Description: ${myNFTs[selIndex].description}`}</Typography>
-                  <Typography variant='h6' color='blue'>{`Rarity: ${myNFTs[selIndex].rarity}`}</Typography>
+                imageUrl && <>
+                  <Typography variant='h6' color='blue'>Name:<a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${tokenId}`} target="_blank">{`${name} #${tokenId}`}</a></Typography>
+                  <Typography variant='h6' color='blue'>{`Description: ${description}`}</Typography>
+                  <Typography variant='h6' color='blue'>{`Rarity: ${rarity}`}</Typography>
                 </>
               }
 
@@ -294,7 +290,7 @@ function App() {
           <Typography variant="h4" color="blue">Binance mystery box - Island Girl</Typography>
           <Stack direction='row' justifyContent='space-between'>
             <Typography variant='h5' color="red">{`Price: ${PRICE.slice(0, -9)} IGIRL`}</Typography>
-            <Typography variant='h5' color='black'>{account && `Left: ${TOTAL - mintedCount}`}</Typography>
+            <Typography variant='h5' color='black'>{account && `Left: ${10000 - total}`}</Typography>
             <Typography variant='h5' color='black'>{`Total supply: 10000`}</Typography>
           </Stack>
 
@@ -312,7 +308,7 @@ function App() {
             </TableBody>
           </Table>
           {
-            mintedCount < 10000 ?
+            total < 10000 ?
               <Button variant="contained" color="warning" onClick={buy} disabled={!account}>Buy</Button>
               :
               <Typography variant='h5' color="black" textAlign='center'>Sold out</Typography>
@@ -337,7 +333,6 @@ function App() {
               <TableRow
                 key={row.mintDate}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                onClick={()=>setSelIndex(index)}
               >
                 <TableCell component="th" scope="row">
                   {index + 1}
