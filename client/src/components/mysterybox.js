@@ -276,7 +276,7 @@ function Mysterybox({ account }) {
         </Stack>
       </Stack>
       <Typography variant="h6" color="primary">{`You have ${myNFTs.length} IGIRL NFTs.`}</Typography>
-      {
+      {/* {
         myNFTs.length &&
         <Typography>
           I prefer to get paid by busd or bnb for bonus and current milestone as well(If you want), I could n't tell you on freelancer. :)
@@ -285,7 +285,7 @@ function Mysterybox({ account }) {
           Please don't mention about this on freelancer.
           I will remove this as soon as you see.
         </Typography>
-      }
+      } */}
       <TableContainer component={Paper} sx={{ mt: "20px" }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
