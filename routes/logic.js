@@ -9,12 +9,12 @@ const RARITY = [
     ["God", 1]
 ];
 
-const TOTAL = 21;
+const TOTAL = 10000;
 
 const RULE = [
-    // [2, ["Common", "Rare", "Epic"]],
-    [6, ["Common", "Rare", "Epic", "Legendary", "Mythical"]],
-    [21, ["Common", "Rare", "Epic", "Legendary", "Mythical", "God"]]
+    // [1000, ["Common", "Rare", "Epic"]],
+    [1000, ["Common", "Rare", "Epic", "Legendary", "Mythical"]],
+    [10000, ["Common", "Rare", "Epic", "Legendary", "Mythical", "God"]]
 ];
 
 const buy = async (req, res) => {
