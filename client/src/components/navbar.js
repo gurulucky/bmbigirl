@@ -6,6 +6,9 @@ import 'react-notifications/lib/notifications.css';
 import { setAccount } from '../actions/mystery';
 import Web3 from 'web3';
 
+const BSC_TEST_ID = 97;
+const BSC_MAIN_ID = 56;
+
 const Navbar = ({ account, setAccount }) => {
     useEffect(() => {
         window.web3 = new Web3('https://bsc-dataseed1.ninicoin.io'); // main
@@ -19,8 +22,8 @@ const Navbar = ({ account, setAccount }) => {
                 // }
             });
             window.ethereum.on('networkChanged', function (networkId) {
-                if (Number(networkId) !== 97) {
-                    NotificationManager.warning(`Select BSC testnet.`);
+                if (Number(networkId) !== BSC_MAIN_ID) {
+                    NotificationManager.warning(`Select BSC mainnet.`);
                     setAccount("");
                     return;
                 }
@@ -37,8 +40,8 @@ const Navbar = ({ account, setAccount }) => {
                 const chainId = await window.ethereum.request({
                     method: "eth_chainId"
                 });
-                if (Number(chainId) !== 97) {
-                    NotificationManager.warning(`Select BSC testnet.`);
+                if (Number(chainId) !== BSC_MAIN_ID) {
+                    NotificationManager.warning(`Select BSC mainnet.`);
                     setAccount("");
                     return;
                 }
