@@ -92,9 +92,6 @@ const Navbar = ({ account, setAccount }) => {
 
                         </ul>
                         <span id="slide-line"></span>
-                        <form className="form-inline mt-2 mt-md-0">
-                            <a className="btn btn-sm btn-gradient-purple btn-glow my-2 my-sm-0 animated" data-animation="fadeInDown" data-animation-delay="1.8s" href="https://t.me/islandgirltoken" target="_blank">Join Telegram</a>
-                        </form>
                         <form className="form-inline mt-2 mt-md-0" style={{ marginLeft: "20px" }}>
                             <p className="btn btn-sm btn-gradient-purple btn-glow my-2 my-sm-0 animated" data-animation="fadeInDown" data-animation-delay="1.8s" onClick={connectWallet}>{account ? shortAddress(account) : `Connect`}</p>
                         </form>

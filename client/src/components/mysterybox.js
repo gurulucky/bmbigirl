@@ -68,7 +68,7 @@ function Mysterybox({ account }) {
   ]
 
   useEffect(() => {
-    
+
 
     if (account) {
       getNFTs(account);
@@ -101,11 +101,11 @@ function Mysterybox({ account }) {
       return;
     }
     try {
-      // let balance = await getTokenBalance(account);
-      // if (isBigger(String(balance), PRICE) === -1) {
-      //   NotificationManager.error(`Your IGIRL isn't enough.`);
-      //   return;
-      // }
+      let balance = await getTokenBalance(account);
+      if (isBigger(String(balance), PRICE) === -1) {
+        NotificationManager.error(`Your IGIRL isn't enough.`);
+        return;
+      }
       let res = await api.post('/buy');
       let uri = res.data.uri;
       let id = res.data.id;
@@ -113,25 +113,25 @@ function Mysterybox({ account }) {
       let msg = res.data.msg;
       console.log(res.data);
       if (uri) {
-        // res = await mint(id, uri);
-        // if (res.status) {
-        playVideo(rarity);
-        // await getTotalCount();
-        // const tokenUri = await getTokenUri(id);
-        // let response = await axios.get(tokenUri);
+        res = await mint(id, uri);
+        if (res.status) {
+          playVideo(rarity);
+          await getTotalCount();
+          const tokenUri = await getTokenUri(id);
+          let response = await axios.get(tokenUri);
 
-        let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${uri}`);
-        console.log(response);
-        let mintDate = new Date();
-        res = await api.post('/mint', { id, account, mintDate });
-        if (res.data.minted) {
-          NotificationManager.success(`You minted IGIRL NFT successfully!. TokenId is ${id}.`);
+          // let response = await axios.get(`https://gateway.pinata.cloud/ipfs/${uri}`);
+          console.log(response);
+          let mintDate = new Date();
+          res = await api.post('/mint', { id, account, mintDate });
+          if (res.data.minted) {
+            NotificationManager.success(`You minted IGIRL NFT successfully!. TokenId is ${id}.`);
+          }
+          setMyNFTs([{ id, image: response.data.image, name: response.data.name, description: response.data.description, rarity, date: mintDate.toLocaleDateString() + ' ' + mintDate.toLocaleTimeString() }, ...myNFTs]);
+          setSelIndex(0);
+        } else {
+          NotificationManager.error('Minting failed.');
         }
-        setMyNFTs([{ id, image: response.data.image, name: response.data.name, description: response.data.description, rarity, date: mintDate.toLocaleDateString() + ' ' + mintDate.toLocaleTimeString() }, ...myNFTs]);
-        setSelIndex(0);
-        // } else {
-        //   NotificationManager.error('Minting failed.');
-        // }
       } else {
         NotificationManager.error(msg);
       }
@@ -217,7 +217,7 @@ function Mysterybox({ account }) {
 
   return (
     <Container sx={{ pt: "80px" }} >
-      
+
       <Stack direction='row' justifyContent='center'>
         <Container sx={{ width: "50%" }}>
           {

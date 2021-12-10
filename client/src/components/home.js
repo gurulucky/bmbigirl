@@ -1,38 +1,71 @@
 /* eslint-disable */
 const Home = () => {
     return (
-        <div className="content-wrapper" >
+        <div className="content-wrapper">
             <div className="content-body">
                 <main>
-                    <section className="head-area" id="head-area">
+                    {/* <!-- Header: 3D Animation --> */}
+                    <section className="head-area pb-5" id="head-area">
                         <div id="particles-js"></div>
                         <div className="head-content d-flex align-items-center">
                             <div className="container">
-                                <div className="banner-wrapper">
-                                    <div className="row align-items-center">
+                                <div className="banner-wrapper pt-5">
+                                    <div className="row align-items-center justify-content-center">
                                         <div className="col-lg-8 col-md-12">
                                             <div className="banner-content pt-5">
-                                                <h1 className="best-template animated" data-animation="fadeInUpShorter" data-animation-delay="1.5s">I’m a Island Girl, I’m a Island Girl</h1>
-                                                <h3 className="d-block white animated" data-animation="fadeInUpShorter" data-animation-delay="1.6s"> JOIN US TODAY IN $IGIRL
-
-                                                    <br className="d-none d-xl-block" />IslandGirl is a community-driven token on Binance Smart Chain, simply hold to earn and watch your $IGIRL grow every transaction 🏝</h3>
-                                                <div className="mt-5">
+                                                <h3 className="text-center">ISLAND GIRL TOKEN🏝</h3>
+                                                <video width="100%" playsinline="playsinline" muted="muted" loop="loop" controls="on">
+                                                    <source src="video2.mp4" type="video/mp4" />
+                                                </video>
+                                                <div className="mt-5 text-center">
                                                     <a href="https://pancakeswap.finance/swap?outputCurrency=0x85469cb22c5e8a063106c987c36c7587810e4bf1" target="_blank" className="btn btn-lg btn-gradient-purple btn-glow mr-4 mb-2 animated" data-animation="fadeInUpShorter" data-animation-delay="1.7s">Buy $IGIRL</a>
-                                                    <a href="https://poocoin.app/tokens/0x85469cb22c5e8a063106c987c36c7587810e4bf1" target="_blank" className="btn btn-lg btn-gradient-purple btn-glow mb-2 animated" data-animation="fadeInUpShorter" data-animation-delay="1.8s">Chart</a>
+                                                    <a href="https://poocoin.app/tokens/0x85469cb22c5e8a063106c987c36c7587810e4bf1" target="_blank" className="btn btn-lg btn-gradient-purple btn-glow mr-4 mb-2 animated" data-animation="fadeInUpShorter" data-animation-delay="1.8s">Chart</a>
+                                                    <a href="https://t.me/islandgirltoken" target="_blank" className="btn btn-lg btn-gradient-purple btn-glow mb-2 animated" data-animation="fadeInUpShorter" data-animation-delay="1.8s">Join Telegram</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-lg-4 col-md-12 move-first">
-                                            <img src="images/sticker2.png" alt="alt" width="400" />
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    {/* <!--/ Header: 3D Animation -->
+                    {/* <!--/ Header: 3D Animation --> */}
 
-                    <!-- Pre-Sale & Mobile Apps --> */}
+                    <section className="head-area" id="about">
+                        <div className="head-content d-flex align-items-center">
+                            <div className="container">
+                                <div className="banner-wrapper">
+                                    <div className="row align-items-center">
+                                        <div className="col-lg-4 col-md-12 move-first">
+                                            <img src="images/sticker2.png" alt="alt" width="400" />
+                                        </div>
+                                        <div className="col-lg-8 col-md-12">
+                                            <div className="banner-content pt-5">
+                                                <h1 className="best-template animated" data-animation="fadeInUpShorter" data-animation-delay="1.5s">About Island Girl ($IGIRL) 🏝</h1>
+                                                <br className="d-none d-xl-block" />Island Girl is a community-driven token on Binance Smart Chain.<br />
+                                                <br className="d-none d-xl-block" />Island Girl combines the real-world pleasures with the Metaverse and Play2earn Gaming.The Island Girl Token will have real use utility in 3 aspects of your life.Holders are automatically rewarded on every transaction with Island Girl Tokens as well.
+                                                <div className="mt-5">
+                                                    <a href="#" className="btn btn-lg btn-gradient-purple btn-glow mr-2 mb-2 animated" data-animation="fadeInUpShorter" data-animation-delay="1.7s">Play2earn Game.
+                                                        <br />30 December 2021
+                                                    </a>
+                                                    <a href="#" className="btn btn-lg btn-gradient-purple btn-glow mr-2 mb-2 animated" data-animation="fadeInUpShorter" data-animation-delay="1.8s">IGirl Metaverse.
+                                                        <br />Summer 2022.
+                                                    </a>
+                                                    <a href="#" className="btn btn-lg btn-gradient-purple btn-glow mb-2 animated" data-animation="fadeInUpShorter" data-animation-delay="1.8s">Buy Island.
+                                                        <br />March 2023
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* <!-- Pre-Sale & Mobile Apps --> */}
                     <section id="token-sale-mobile-app" className="token-sale-mobile-app section-padding pt-5 pb-5">
                         {/* <!-- Tokens Sale --> */}
                         <div className="token-sale">
@@ -46,7 +79,7 @@ const Home = () => {
                                         <div className="token-sale-counter">
 
                                             <div className="token-details text-center">
-                                                <span className="white" style={{fontSize: "30px"}}>2% Rewards</span>
+                                                <span className="white" style={{ fontSize: "30px" }}>2% Rewards</span>
                                             </div>
                                         </div>
                                     </div>
@@ -54,7 +87,7 @@ const Home = () => {
                                         <div className="token-sale-counter">
 
                                             <div className="token-details text-center">
-                                                <span className="white" style={{fontSize: "30px"}}>2% Liquidity</span>
+                                                <span className="white" style={{ fontSize: "30px" }}>2% Liquidity</span>
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +95,7 @@ const Home = () => {
                                         <div className="token-sale-counter">
 
                                             <div className="token-details text-center">
-                                                <span className="white" style={{fontSize: "30px"}}>6% Marketing</span>
+                                                <span className="white" style={{ fontSize: "30px" }}>6% Marketing</span>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +129,7 @@ const Home = () => {
                                     </div>
 
                                     <div className="col-lg-6 col-md-3 text-center mt-4 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
-                                        <p className="pt-5">The amount of Telegram members will unlock features. The more Telegram users we have, the more features are being unlocked! Show your love to Island Girl and help it grow and we will support the growth and deliver. </p>
+                                        <p className="pt-5">The amount of Telegram members will unlock features.The more Telegram users we have, the more features are being unlocked!Show your love to Island Girl and help it grow and we will support the growth and deliver.</p>
                                     </div>
 
 
@@ -112,15 +145,15 @@ const Home = () => {
                         <div className="token-sale">
                             <div className="container">
                                 <div className="heading text-center mb-5">
-                                    <h6 className="sub-title">NFTS</h6>
-                                    <h2 className="title">NFTS</h2>
+                                    <h6 className="sub-title">MysteryBox</h6>
+                                    <h2 className="title">MysteryBox</h2>
                                 </div>
                                 <div className="row align-items-center">
                                     <div className="col-xl-6 col-lg-6 col-md-6 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
                                         <div className="token-sale-counter">
 
                                             <div className="token-details text-center">
-                                                <span className="white" style={{fontSize: "30px"}}>Coming soon </span>
+                                                <span className="white" style={{ fontSize: "30px" }}>Buy Island Girl MysteryBox</span>
                                             </div>
                                         </div>
                                     </div>
@@ -151,29 +184,16 @@ const Home = () => {
                                             <div className="col-xl-4 col-lg-4 col-md-4 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
                                                 <div className="token-sale-counter">
 
-                                                    <div className="token-details" style={{height: "auto"}}>
-                                                        <span className="white"><i className="fa fa-adjust"></i> 100 tg members: Unlock stickers.
-                                                            <br /><i className="fa fa-adjust"></i> 200: Unlock website.
-                                                            <br /><i className="fa fa-adjust"></i> 300: Unlock memecontest.
-                                                            <br /><i className="fa fa-adjust"></i> 400: Unlock Shill contest.
-                                                            <br /><i className="fa fa-adjust"></i> 450: Unlock hire full-time Telegram shiller with bot.
-                                                            <br /><i className="fa fa-adjust"></i> 500: Unlock massive airdrop!
-                                                            <br /><i className="fa fa-adjust"></i> 600: Unlock Twitter Influencer.
-                                                            <br /><i className="fa fa-adjust"></i> 750: Unlock 1 tiktok influencer.
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-4 col-lg-4 col-md-4 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
-                                                <div className="token-sale-counter">
-
-                                                    <div className="token-details" style={{height: "auto"}}>
-                                                        <span className="white"><i className="fa fa-adjust"></i> 1000: Unlock Island Girl NFT's season 1 on our website. The NFT will be playable characters in the game.
-                                                            <br /><i className="fa fa-adjust"></i> 1200: Unlock Island Girl merchandise webshop.
-                                                            <br /><i className="fa fa-adjust"></i> 1500: Unlock NFT marketplace for trading your Island Girls!
-                                                            <br /><i className="fa fa-adjust"></i> 2000: Unlock Island Girl Ticket as NFT’S.Everyday 1 ticket giveaway.Only for IGIRL holders.
-                                                            <br /><i className="fa fa-adjust"></i> 2300: Unlock massive marketing push.
-                                                            <br /><i className="fa fa-adjust"></i> 2500: Unlock beautiful Island Girl art limited edition which airdrops passive $IGIRL token weekly.This is gonna be beautiful 😏.
+                                                    <div className="token-details" style={{ height: "auto" }}>
+                                                        <span className="white"><b>Q4 2021</b>
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #1<br />
+                                                            6 Playable Island Girl characters revealed and for sale on the website in the form of Mystery Boxes.Every Character has his own rarity level and different bonus skills for the Play 2 Earn Island Girl Game.(Deadline: 6 December 2021)
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #2<br />
+                                                            Reveal Game Trailer #1 of the Play 2 Earn Island Girl Game.Real live footage of the gameplay and Earn aspect revealed.(Deadline: 13 December 2021)
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #3<br />
+                                                            Reveal 3 Brochures of Islands 🏝.Voting opened for community on the website for the Island we going to buy.You must hold Island Girl Tokens to be able to vote.(Deadline: 20 December 2021)
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #4<br />
+                                                            Launch Island Girl Play 2 Earn Game on our website (Beta testing).Only VIP members can play and test the Game.(Deadline: 30 December 2021)
 
                                                         </span>
                                                     </div>
@@ -182,15 +202,27 @@ const Home = () => {
                                             <div className="col-xl-4 col-lg-4 col-md-4 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
                                                 <div className="token-sale-counter">
 
-                                                    <div className="token-details" style={{height: "auto"}}>
-                                                        <span className="white"><i className="fa fa-adjust"></i> 3000: Unlock Time Square Billboard Advertisement for Island Girl.
-                                                            <br /><i className="fa fa-adjust"></i> 4000: Unlock staking to earn more $IGIRL.
-                                                            <br /><i className="fa fa-adjust"></i> 5000: Unlock Exchange listing.
-                                                            <br /><i className="fa fa-adjust"></i> 10.000: Unlock Island Girl NFT staking to earn $IGIRL.
-                                                            <br /><i className="fa fa-adjust"></i> 15.000: Unlock NFT farming.
-                                                            <br /><i className="fa fa-adjust"></i> 20.000: Unlock Island Girl play to earn game.
-                                                            <br /><i className="fa fa-adjust"></i> 50.000: Unlock Island that we buy exclusively for ticket holders
+                                                    <div className="token-details" style={{ height: "auto" }}>
+                                                        <span className="white"><b>Q1 2022</b>
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #1<br />
+                                                            Launch Island Girl Play 2 Earn Game 🥳.Full Game launched without bugs or errors.Players must get an Island Girl character to start playing the game.(Deadline: 10 January 2022)
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #2<br />
+                                                            Buy Island chosen by the community and reveal 🥳.Start preparing for visits.(Deadline: 21 January 2022)
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #3<br />
+                                                            Launch Beta testing of Island Girl Metaverse.VIP members will be able to buy land before the public.(Deadline: 30 March 2022)
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-xl-4 col-lg-4 col-md-4 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
+                                                <div className="token-sale-counter">
 
+                                                    <div className="token-details" style={{ height: "auto" }}>
+                                                        <span className="white"><b>Q2 2022</b>
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #1<br />
+                                                            Open Island Girl Resort.Ticket holders can visit the resort for free once using their ticket.See our website for the rules and guidelines.Also, collectible NFT holders (opensea.io Island Girl NFT's) will be eligible for free visits once a year to the Island Girl Resort.
+                                                            <br /> <i className="fa fa-adjust"></i>Phase #2<br />
+                                                            Launch Island Girl Metaverse Game.Full playable metaverse game.The Island Girl Metaverse Game will be in direct connection with the Play2earn Game and the Island Girl NFT's. (Deadline: 28 June 2022)
                                                         </span>
                                                     </div>
                                                 </div>
@@ -218,8 +250,8 @@ const Home = () => {
                                             <div className="col-xl-6 col-lg-6 col-md-6 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
                                                 <div className="token-sale-counter">
 
-                                                    <div className="token-details" style={{height: "auto"}}>
-                                                        <video width="100%" playsInline="playsinline" muted="muted" loop="loop" controls="on">
+                                                    <div className="token-details" style={{ height: "auto" }}>
+                                                        <video width="100%" playsinline="playsinline" muted="muted" loop="loop" controls="on">
                                                             <source src="video.mp4" type="video/mp4" />
                                                         </video>
                                                     </div>
@@ -228,8 +260,8 @@ const Home = () => {
                                             <div className="col-xl-6 col-lg-6 col-md-6 animated" data-animation="fadeInUpShorter" data-animation-delay="0.6s">
                                                 <div className="token-sale-counter">
 
-                                                    <div className="token-details" style={{height: "auto"}}>
-                                                        <video width="100%" playsInline="playsinline" muted="muted" loop="loop" controls="on">
+                                                    <div className="token-details" style={{ height: "auto" }}>
+                                                        <video width="100%" playsinline="playsinline" muted="muted" loop="loop" controls="on">
                                                             <source src="video1.mp4" type="video/mp4" />
                                                         </video>
                                                     </div>
@@ -249,7 +281,7 @@ const Home = () => {
                             <div className="row">
                                 <div className="col-lg-6">
                                     <div style={{height:"400px",overflow:"scroll",backgroundColor:"#67F152"}}>
-                                        <a className="twitter-timeline" href="https://twitter.com/Islandgirltoken?ref_src=twsrc%5Etfw">Tweets by Islandgirltoken</a> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+                                        <a className="twitter-timeline" href="https://twitter.com/Islandgirltoken?ref_src=twsrc%5Etfw">Tweets by Islandgirltoken</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                                     </div></div>
                                 <div className="col-lg-6">
                                     <div className="heading text-center mb-0">
@@ -261,19 +293,19 @@ const Home = () => {
                                         <p className="content-desc animated" data-animation="fadeInUpShorter" data-animation-delay="0.4s">Have questions?We’re happy to help.</p>
                                     </div>
                                     <div className="row align-items-center">
-                                        <div className="col-xl-3 col-md-3" style={{paddingLeft: "65px"}}>
+                                        <div className="col-xl-3 col-md-3" style={{paddingLeft:"65px"}}>
                                             <a href="https://twitter.com/Islandgirltoken/" target="_blank"><img src="images/twitter-logo.png" alt="alt" width="100" />
                                             </a>
                                         </div>
-                                        <div className="col-xl-3 col-md-3" style={{paddingLeft: "65px"}}>
+                                        <div className="col-xl-3 col-md-3" style={{paddingLeft:"65px"}}>
                                             <a href="https://t.me/islandgirltoken" target="_blank"><img src="images/telegram-logo.png" alt="alt" width="100" />
                                             </a>
                                         </div>
-                                        <div className="col-xl-3 col-md-3" style={{paddingLeft: "65px"}}>
+                                        <div className="col-xl-3 col-md-3" style={{paddingLeft:"65px"}}>
                                             <a href="https://pancakeswap.finance/swap?outputCurrency=0x85469cb22c5e8a063106c987c36c7587810e4bf1" target="_blank"><img src="images/pancake-logo.png" alt="alt" width="100" />
                                             </a>
                                         </div>
-                                        <div className="col-xl-3 col-md-3" style={{paddingLeft: "65px"}}>
+                                        <div className="col-xl-3 col-md-3" style={{paddingLeft:"65px"}}>
                                             <a href="https://poocoin.app/tokens/0x85469cb22c5e8a063106c987c36c7587810e4bf1" target="_blank"><img src="images/poocoin-logo.png" alt="alt" width="100" />
                                             </a>
                                         </div>
@@ -282,12 +314,14 @@ const Home = () => {
                             </div>
                         </div>
 
-                    </section>
+
+                    </section >
+                    {/* < !--/ Contact --> */}
 
 
-                    {/* <!-- Advisors Team Modal Pop-ups -->
-                                                                                    <!-- Team user popup - teamUser1 --> */}
-                    <div className="modal team-modal fade" id="teamUser1" tabIndex="-1" role="dialog" aria-labelledby="teamUser1Title" aria-hidden="true">
+                    {/* < !--Advisors Team Modal Pop - ups-- > */}
+                    {/* < !--Team user popup - teamUser1-- > */}
+                    <div className="modal team-modal fade" id="teamUser1" tabindex="-1" role="dialog" aria-labelledby="teamUser1Title" aria-hidden="true">
                         <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
                             <div className="modal-content">
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
@@ -329,8 +363,8 @@ const Home = () => {
                         </div>
                     </div>
 
-                </main>
-            </div>
+                </main >
+            </div >
         </div >
     )
 }
