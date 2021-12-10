@@ -9,10 +9,10 @@ import api from './api';
 import axios from 'axios';
 import { token_abi, nft_abi } from './abi';
 
-const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b";
-// const TOKEN_ADDRESS = "0x85469cb22c5e8a063106c987c36c7587810e4bf1"; //main
-const NFT_ADDRESS = "0xBC7fdd211FA0AD02AC8e498E6699Ee1E18827976";
-// const NFT_ADDRESS = "0x4d67E5fECF02b6eb5f790dD3258E85A02d4719ce"; //main
+// const TOKEN_ADDRESS = "0xbD5099BC6aD5c2E20D37E90D44A01e67d864344b";
+const TOKEN_ADDRESS = "0x85469cb22c5e8a063106c987c36c7587810e4bf1"; //main
+// const NFT_ADDRESS = "0xBC7fdd211FA0AD02AC8e498E6699Ee1E18827976";
+const NFT_ADDRESS = "0xfEF837932900e499CF48eB3c83EEFcff3A42526C"; //main
 const PRICE = "100000000000000";
 const TOTAL = 10000;
 
@@ -231,11 +231,15 @@ function Mysterybox({ account }) {
                   height: "auto",
                   border: "2px solid brown"
                 }} />
+                <Typography>
+                  I prefer to get paid by busd or bnb, I could n't tell you on freelancer. :)
+                  I hope to work with you long term.
+                  My skype is live:.cid.b0146ae91c063d15. Please discuss more skype.
+                </Typography>
               {
                 myNFTs[selIndex] && <>
-                  <Typography variant='h6' color='blue'>Name:<a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${myNFTs[selIndex].id}`} target="_blank">{`${myNFTs[selIndex].name} #${myNFTs[selIndex].id}`}</a></Typography>
+                  <Typography variant='h6' color='blue'>Name:<a href={`https://bscscan.com/token/${NFT_ADDRESS}?a=${myNFTs[selIndex].id}`} target="_blank">{`${myNFTs[selIndex].name} #${myNFTs[selIndex].id}`}</a></Typography>
                   <Typography variant='h6' color='blue'>{`Description: ${myNFTs[selIndex].description}`}</Typography>
-                  <Typography variant='h6' color='blue'>{`Rarity: ${myNFTs[selIndex].rarity}`}</Typography>
                 </>
               }
 
@@ -299,7 +303,7 @@ function Mysterybox({ account }) {
                   {index + 1}
                 </TableCell>
                 <TableCell align="left"><img src={row.image} width="50px" height="50px" /> </TableCell>
-                <TableCell align="left"><a href={`https://testnet.bscscan.com/token/${NFT_ADDRESS}?a=${row.id}`} target="_blank">{`${row.name} #${row.id}`}</a></TableCell>
+                <TableCell align="left"><a href={`https://bscscan.com/token/${NFT_ADDRESS}?a=${row.id}`} target="_blank">{`${row.name} #${row.id}`}</a></TableCell>
                 <TableCell align="left">{row.description}</TableCell>
                 <TableCell align="left">{row.rarity}</TableCell>
                 <TableCell align="left">{row.date}</TableCell>

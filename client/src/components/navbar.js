@@ -8,8 +8,8 @@ import Web3 from 'web3';
 
 const Navbar = ({ account, setAccount }) => {
     useEffect(() => {
-        // window.web3 = new Web3('https://bsc-dataseed1.ninicoin.io'); // main
-        window.web3 = new Web3('https://data-seed-prebsc-1-s3.binance.org:8545/');
+        window.web3 = new Web3('https://bsc-dataseed1.ninicoin.io'); // main
+        // window.web3 = new Web3('https://data-seed-prebsc-1-s3.binance.org:8545/');
         if (window.ethereum) {
             // window.web3 = new Web3(window.ethereum);
             window.ethereum.on('accountsChanged', function (accounts) {
@@ -63,7 +63,7 @@ const Navbar = ({ account, setAccount }) => {
     return (
         <header className="page-header">
             <nav className="main-menu static-top navbar-dark navbar navbar-expand-lg fixed-top mb-1"><div className="container">
-                <a className="navbar-brand animated" data-animation="fadeInDown" data-animation-delay="1s" href="/#head-area">
+                <a className="navbar-brand animated" data-animation="fadeInDown" data-animation-delay="1s" href="https://islandgirltoken.com/#head-area">
                     <img src="images/logo.png" alt="Crypto Logo" width="70" /><span className="brand-text"><span className="font-weight-bold">ISLAND</span> GIRL</span></a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -72,22 +72,22 @@ const Navbar = ({ account, setAccount }) => {
                     <div id="navigation" className="navbar-nav ml-auto">
                         <ul className="navbar-nav mt-1">
                             <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.1s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="/#head-area">ABOUT</a>
+                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#head-area">ABOUT</a>
                             </li>
                             <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.2s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="/#token-sale-mobile-app">TOKENOMICS</a>
+                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#token-sale-mobile-app">TOKENOMICS</a>
                             </li>
                             <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.3s" style={{ marginRight: "20px" }}>
-                                <a href="/mysterybox" style={{ color: "green", fontSize: "0.8rem" }}>NFTS</a>
+                                <a href="" style={{ color: "green", fontSize: "0.8rem" }}>MYSTERYBOX</a>
                             </li>
                             <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.4s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="/#roadmap">ROADMAP</a>
+                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#roadmap">ROADMAP</a>
                             </li>
                             <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.5s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="/#merchandise">MERCHANDISE</a>
+                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#merchandise">VIDEOS</a>
                             </li>
                             <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.5s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="/#contact">CONTACT</a>
+                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#contact">CONTACT</a>
                             </li>
 
                         </ul>

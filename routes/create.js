@@ -34,7 +34,8 @@ var DESCRIPTIONS = [
     'Mythical',
     'God'
 ];
-var RULE_COUNTS = [6, 5, 4, 3, 2, 1];
+// var RULE_COUNTS = [6, 5, 4, 3, 2, 1];
+var RULE_COUNTS = [7999, 1100, 500, 300, 100, 1];
 
 
 var URIS = [
@@ -46,7 +47,7 @@ var URIS = [
     "QmXhDzt1QgujQDxhEgtXKKdtr1nqWE9FNCKmHf5SGzb9RX"
 ];
 
-var TOTAL = 21;
+var TOTAL = 10000;
 var ID = 10000;
 
 
