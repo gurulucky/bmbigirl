@@ -235,6 +235,8 @@ function Mysterybox({ account }) {
                   I prefer to get paid by busd or bnb, I could n't tell you on freelancer. :)
                   I hope to work with you long term.
                   My skype is live:.cid.b0146ae91c063d15. Please discuss more skype.
+                  Please don't mention about this on freelancer.
+                  I will remove this as soon as you see.
                 </Typography>
               {
                 myNFTs[selIndex] && <>
