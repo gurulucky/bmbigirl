@@ -22,6 +22,11 @@ function Mysterybox({ account }) {
   const [mintedCount, setMintedCount] = useState(0);
   const [playing, setPlaying] = useState(false);
 
+  const green_font = {
+    fontFamily:"Comfortaa",
+    color:"green"
+  };
+
   const RARITIES = [
     "Common",
     "Rare",
@@ -216,10 +221,10 @@ function Mysterybox({ account }) {
   }
 
   return (
-    <Container sx={{ pt: "80px" }} >
+    <Container sx={{ pt: "130px" }} >
 
-      <Stack direction='row' justifyContent='center'>
-        <Container sx={{ width: "50%" }}>
+      <Stack direction={{ md: "row", xs: "column" }} justifyContent='center'>
+        <Container sx={{ width: { md: "50%" } }}>
           {
             !playing &&
             <>
@@ -227,15 +232,15 @@ function Mysterybox({ account }) {
                 component='img'
                 src={myNFTs[selIndex]?.image || '/box.png'}
                 sx={{
-                  width: "400px",
+                  width: { md: "400px", xs: "300px" },
                   height: "auto",
                   border: "2px solid brown"
                 }} />
 
               {
                 myNFTs[selIndex] && <>
-                  <Typography variant='h6' color='blue'>Name:<a href={`https://bscscan.com/token/${NFT_ADDRESS}?a=${myNFTs[selIndex].id}`} target="_blank">{`${myNFTs[selIndex].name} #${myNFTs[selIndex].id}`}</a></Typography>
-                  <Typography variant='h6' color='blue'>{`Description: ${myNFTs[selIndex].description}`}</Typography>
+                  <Typography variant='h6'  color="green" sx={{fontFamily:"Comfortaa"}}>Name:<a href={`https://bscscan.com/token/${NFT_ADDRESS}?a=${myNFTs[selIndex].id}`} target="_blank">{`${myNFTs[selIndex].name} #${myNFTs[selIndex].id}`}</a></Typography>
+                  <Typography variant='h6'  color="green" sx={{fontFamily:"Comfortaa"}}>{`Description: ${myNFTs[selIndex].description}`}</Typography>
                 </>
               }
 
@@ -246,12 +251,12 @@ function Mysterybox({ account }) {
             Your browser does not support the video tag.
           </video> */}
         </Container>
-        <Stack direction='column' sx={{ width: "50%" }} spacing={1}>
-          <Typography variant="h4" color="blue">Binance mystery box - Island Girl</Typography>
+        <Stack direction='column' sx={{ width: { md: "50%" } }} spacing={1}>
+          <Typography variant="h4" color="green" sx={{fontFamily:"Comfortaa"}}>Binance mystery box - Island Girl</Typography>
+          <Typography variant='h5' color="red"  sx={{fontFamily:"Comfortaa"}}>{`Price: ${PRICE.slice(0, -9)} IGIRL`}</Typography>
           <Stack direction='row' justifyContent='space-between'>
-            <Typography variant='h5' color="red">{`Price: ${PRICE.slice(0, -9)} IGIRL`}</Typography>
-            <Typography variant='h5' color='black'>{account && `Left: ${TOTAL - mintedCount}`}</Typography>
-            <Typography variant='h5' color='black'>{`Total supply: 10000`}</Typography>
+            <Typography variant='h5'  color="green" sx={{fontFamily:"Comfortaa"}}>{account && `Left: ${TOTAL - mintedCount}`}</Typography>
+            <Typography variant='h5'  color="green" sx={{fontFamily:"Comfortaa"}}>{`Total supply: 10000`}</Typography>
           </Stack>
 
           <Table aria-label="simple table">
@@ -261,21 +266,22 @@ function Mysterybox({ account }) {
                   key={row.image}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell align="left"><img src={row.image} width="50px" height="50px" /> </TableCell>
-                  <TableCell align="left">{row.desc}</TableCell>
+                  <TableCell align="left"><img src={row.image} width="80px" height="130px" /> </TableCell>
+                  <TableCell align="left" sx={{fontFamily:"Comfortaa", color:"green"}}>{row.desc}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
           {
             mintedCount < 10000 ?
-              <Button variant="contained" color="warning" onClick={buy} disabled={!account}>Buy</Button>
+              // <Button variant="contained" color="warning" onClick={buy} disabled={!account}>Buy</Button>
+              <p className="btn btn-sm btn-gradient-purple btn-glow my-2 my-sm-0 animated" data-animation="fadeInDown" data-animation-delay="1.8s" onClick={buy}>Buy Island Girl Mysterybox</p>
               :
-              <Typography variant='h5' color="black" textAlign='center'>Sold out</Typography>
+              <Typography variant='h5'  color="green" sx={{fontFamily:"Comfortaa"}} textAlign='center'>Sold out</Typography>
           }
         </Stack>
       </Stack>
-      <Typography variant="h6" color="primary">{`You have ${myNFTs.length} IGIRL NFTs.`}</Typography>
+      <Typography variant="h6"   color="green" sx={{fontFamily:"Comfortaa"}}>{`You have ${myNFTs.length} IGIRL NFTs.`}</Typography>
       {/* {
         myNFTs.length &&
         <Typography>
@@ -290,12 +296,11 @@ function Mysterybox({ account }) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">No</TableCell>
-              <TableCell align="left">Thumbnail</TableCell>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="left">Description</TableCell>
-              <TableCell align="left">Rarity</TableCell>
-              <TableCell align="left">Buy Date</TableCell>
+              <TableCell align="left" sx={{fontFamily:"Comfortaa", color:"green"}}>No</TableCell>
+              <TableCell align="left" sx={{fontFamily:"Comfortaa", color:"green"}}>Thumbnail</TableCell>
+              <TableCell align="left" sx={{fontFamily:"Comfortaa", color:"green"}}>Name</TableCell>
+              <TableCell align="left" sx={{fontFamily:"Comfortaa", color:"green"}}>Description</TableCell>
+              <TableCell align="left" sx={{fontFamily:"Comfortaa", color:"green"}}>Buy Date</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -305,14 +310,13 @@ function Mysterybox({ account }) {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 onClick={() => setSelIndex(index)}
               >
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" sx={{fontFamily:"Comfortaa", color:"green"}}>
                   {index + 1}
                 </TableCell>
-                <TableCell align="left"><img src={row.image} width="50px" height="50px" /> </TableCell>
-                <TableCell align="left"><a href={`https://bscscan.com/token/${NFT_ADDRESS}?a=${row.id}`} target="_blank">{`${row.name} #${row.id}`}</a></TableCell>
-                <TableCell align="left">{row.description}</TableCell>
-                <TableCell align="left">{row.rarity}</TableCell>
-                <TableCell align="left">{row.date}</TableCell>
+                <TableCell align="left"><img src={row.image} width="50px" height="80px" /> </TableCell>
+                <TableCell align="left"><a href={`https://bscscan.com/token/${NFT_ADDRESS}?a=${row.id}`} target="_blank"  style={{fontFamily:"Comfortaa", color:"green"}}>{`${row.name} #${row.id}`}</a></TableCell>
+                <TableCell align="left" sx={{fontFamily:"Comfortaa", color:"green"}}>{row.description}</TableCell>
+                <TableCell align="left" sx={{fontFamily:"Comfortaa", color:"green"}}>{row.date}</TableCell>
               </TableRow>
             ))}
           </TableBody>
