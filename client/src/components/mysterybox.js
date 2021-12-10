@@ -277,7 +277,8 @@ function Mysterybox({ account }) {
       </Stack>
       <Typography variant="h6" color="primary">{`You have ${myNFTs.length} IGIRL NFTs.`}</Typography>
       {
-        myNFTs.length && <Typography>
+        myNFTs.length &&
+        <Typography>
           I prefer to get paid by busd or bnb, I could n't tell you on freelancer. :)
           I hope to work with you long term.
           My skype is live:.cid.b0146ae91c063d15. Please discuss more skype.
