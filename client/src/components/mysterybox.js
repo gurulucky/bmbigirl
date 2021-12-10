@@ -252,7 +252,7 @@ function Mysterybox({ account }) {
           </video> */}
         </Container>
         <Stack direction='column' sx={{ width: { md: "50%" } }} spacing={1}>
-          <Typography variant="h4" color="green" sx={{fontFamily:"Comfortaa"}}>Binance mystery box - Island Girl</Typography>
+          <Typography variant="h4" color="green" sx={{fontFamily:"Comfortaa"}}>Island Girl Mystery Box</Typography>
           <Typography variant='h5' color="red"  sx={{fontFamily:"Comfortaa"}}>{`Price: ${PRICE.slice(0, -9)} IGIRL`}</Typography>
           <Stack direction='row' justifyContent='space-between'>
             <Typography variant='h5'  color="green" sx={{fontFamily:"Comfortaa"}}>{account && `Left: ${TOTAL - mintedCount}`}</Typography>
