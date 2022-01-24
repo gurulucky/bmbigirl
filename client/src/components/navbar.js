@@ -2,9 +2,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import MenuIcon from '@mui/icons-material/Menu';
 import 'react-notifications/lib/notifications.css';
 import { setAccount } from '../actions/mystery';
 import Web3 from 'web3';
+import { Menu } from '@mui/material';
 
 const BSC_TEST_ID = 97;
 const BSC_MAIN_ID = 56;
@@ -65,42 +67,46 @@ const Navbar = ({ account, setAccount }) => {
 
     return (
         <header className="page-header">
-            <nav className="main-menu static-top navbar-dark navbar navbar-expand-lg fixed-top mb-1"><div className="container">
-                <a className="navbar-brand animated" data-animation="fadeInDown" data-animation-delay="1s" href="https://islandgirltoken.com/#head-area">
-                    <img src="images/logo.png" alt="Crypto Logo" width="70" /><span className="brand-text"><span className="font-weight-bold">ISLAND</span> GIRL</span></a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarCollapse">
-                    <div id="navigation" className="navbar-nav ml-auto">
-                        <ul className="navbar-nav mt-1">
-                            <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.1s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#head-area">ABOUT</a>
-                            </li>
-                            <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.2s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#token-sale-mobile-app">TOKENOMICS</a>
-                            </li>
-                            <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.3s" style={{ marginRight: "20px" }}>
-                                <a href="" style={{ color: "green", fontSize: "0.8rem" }}>MYSTERYBOX</a>
-                            </li>
-                            <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.4s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#roadmap">ROADMAP</a>
-                            </li>
-                            <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.5s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#merchandise">VIDEOS</a>
-                            </li>
-                            <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.5s" style={{ marginRight: "20px" }}>
-                                <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#contact">CONTACT</a>
-                            </li>
+            <nav className="main-menu static-top navbar-dark navbar navbar-expand-lg fixed-top mb-1" style={{backgroundColor:"white"}}>
+                <div className="container">
+                    <a className="navbar-brand animated" data-animation="fadeInDown" data-animation-delay="1s" href="https://islandgirltoken.com/#head-area">
+                        <img src="images/logo.png" alt="Crypto Logo" width="70" /><span className="brand-text"><span className="font-weight-bold">ISLAND</span> GIRL</span></a>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        {/* <span className="navbar-toggler-icon"></span>
+                         */}
+                        <MenuIcon sx={{ color: "black" }} />
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarCollapse">
+                        <div id="navigation" className="navbar-nav ml-auto">
+                            <ul className="navbar-nav mt-1">
+                                <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.1s" style={{ marginRight: "20px" }}>
+                                    <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#head-area">ABOUT</a>
+                                </li>
+                                <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.2s" style={{ marginRight: "20px" }}>
+                                    <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#token-sale-mobile-app">TOKENOMICS</a>
+                                </li>
+                                <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.3s" style={{ marginRight: "20px" }}>
+                                    <a href="" style={{ color: "green", fontSize: "0.8rem" }}>MYSTERYBOX</a>
+                                </li>
+                                <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.4s" style={{ marginRight: "20px" }}>
+                                    <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#roadmap">ROADMAP</a>
+                                </li>
+                                <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.5s" style={{ marginRight: "20px" }}>
+                                    <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#merchandise">VIDEOS</a>
+                                </li>
+                                <li className="nav-item animated" data-animation="fadeInDown" data-animation-delay="1.5s" style={{ marginRight: "20px" }}>
+                                    <a style={{ color: "green", fontSize: "0.8rem" }} href="https://islandgirltoken.com/#contact">CONTACT</a>
+                                </li>
 
-                        </ul>
-                        <span id="slide-line"></span>
+                            </ul>
+                        </div>
                         <form className="form-inline mt-2 mt-md-0" style={{ marginLeft: "20px" }}>
                             <p className="btn btn-sm btn-gradient-purple btn-glow my-2 my-sm-0 animated" data-animation="fadeInDown" data-animation-delay="1.8s" onClick={connectWallet}>{account ? shortAddress(account) : `Connect`}</p>
                         </form>
                     </div>
+                    <span id="slide-line"></span>
+
                 </div>
-            </div>
             </nav>
             <NotificationContainer />
         </header>
